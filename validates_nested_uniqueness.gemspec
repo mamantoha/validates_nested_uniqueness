@@ -11,6 +11,8 @@ Gem::Specification.new do |gem|
   gem.licenses = ['MIT']
 
   gem.files = [
+    'README.md',
+    'LICENSE',
     'lib/locale/en.yml',
     'lib/validates_nested_uniqueness.rb'
   ]

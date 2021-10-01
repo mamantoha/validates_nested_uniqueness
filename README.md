@@ -1,5 +1,7 @@
 # Validates Nested Uniqueness
 
+[![Ruby](https://github.com/mamantoha/validates_nested_uniqueness/actions/workflows/ruby.yml/badge.svg)](https://github.com/mamantoha/validates_nested_uniqueness/actions/workflows/ruby.yml)
+
 This gem adds the capability of validating nested uniqueness to ActiveRecord.
 
 <https://github.com/rails/rails/issues/20676>

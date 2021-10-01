@@ -8,6 +8,8 @@ This gem adds the capability of validating nested uniqueness to ActiveRecord.
 
 ## Installation
 
+`validates_nested_uniqueness` works with Rails 4.1 onwards.
+
 Add this to your `Gemfile`:
 
 ```ruby

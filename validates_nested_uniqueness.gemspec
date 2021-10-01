@@ -19,8 +19,8 @@ Gem::Specification.new do |gem|
   gem.require_paths = ['lib']
   gem.required_ruby_version = '>= 2.6.0'
 
-  gem.add_development_dependency('activerecord', '>= 5.0.0')
+  gem.add_runtime_dependency('activemodel', '>= 4.1.0')
+
+  gem.add_development_dependency('activerecord', '>= 4.1.0')
   gem.add_development_dependency('rspec', '>= 3.0.0')
-  gem.add_development_dependency('sqlite3', '>= 1.3.0')
-  gem.add_runtime_dependency('activemodel', '>= 5.0.0')
 end

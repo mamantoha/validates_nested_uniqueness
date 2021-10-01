@@ -16,7 +16,7 @@ module ActiveRecord
 
         super
 
-        @watch = options[:watch]
+        @column = options[:column]
         @case_sensitive = options[:case_sensitive]
         @scope = options[:scope] || []
         @error_key = options[:error_key] || :nested_taken
@@ -30,8 +30,8 @@ module ActiveRecord
           dupe = @scope.each.each_with_object({}) do |(k), memo|
             memo[k] = nested_val.try(k)
           end
-          dupe[@watch] = nested_val.try(@watch)
-          dupe[@watch] = dupe[@watch].try(:downcase) if @case_sensitive == false
+          dupe[@column] = nested_val.try(@column)
+          dupe[@column] = dupe[@column].try(:downcase) if @case_sensitive == false
 
           if dupes.member?(dupe)
             record.errors.add(:base, @error_key, message: @message)
@@ -56,7 +56,7 @@ module ActiveRecord
       #     accepts_nested_attributes_for :cities, allow_destroy: true
       #
       #     validates :cities, nested_uniqueness: {
-      #       watch: :name,
+      #       column: :name,
       #       scope: [:country_id],
       #       case_sensitive: false
       #     }
@@ -65,7 +65,7 @@ module ActiveRecord
       #   country = Country.new(name: 'US', cities: [City.new(name: 'NY'), City.new(name: 'NY')])
       #
       # Configuration options:
-      # * <tt>:watch</tt> - Specify the column of associated model to validate.
+      # * <tt>:column</tt> - Specify the column of associated model to validate.
       # * <tt>:scope</tt> - One or more columns by which to limit the scope of
       #   the uniqueness constraint.
       # * <tt>:case_sensitive</tt> - Looks for an exact match. Ignored by

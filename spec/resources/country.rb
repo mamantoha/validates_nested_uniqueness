@@ -5,7 +5,7 @@ class Country < ActiveRecord::Base
   accepts_nested_attributes_for :cities, allow_destroy: true
 
   validates :cities, nested_uniqueness: {
-    watch: :name,
+    column: :name,
     scope: [:country_id],
     case_sensitive: false
   }

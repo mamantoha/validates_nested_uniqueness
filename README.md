@@ -44,3 +44,21 @@ country = Country.new(name: 'US', cities: [City.new(name: 'NY'), City.new(name: 
 country.save
 # => false
 ```
+
+## Contributing
+
+1. Fork it (<https://github.com/mamantoha/validates_nested_uniqueness/fork>)
+2. Create your feature branch (git checkout -b my-new-feature)
+3. Commit your changes (git commit -am 'Add some feature')
+4. Push to the branch (git push origin my-new-feature)
+5. Create a new Pull Request
+
+## Contributors
+
+- [mamantoha](https://github.com/mamantoha) Anton Maminov - creator, maintainer
+
+## License
+
+Copyright: 2021 Anton Maminov (anton.maminov@gmail.com)
+
+This library is distributed under the MIT license. Please see the LICENSE file.

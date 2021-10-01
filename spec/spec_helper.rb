@@ -19,4 +19,6 @@ ActiveRecord::Base.establish_connection(
 require File.join(File.dirname(__FILE__), '..', 'init')
 
 autoload :Country, 'resources/country'
+autoload :CountryWithCaseSensitive, 'resources/country_with_case_sensitive'
+autoload :CountryWithMessage, 'resources/country_with_message'
 autoload :City, 'resources/city'

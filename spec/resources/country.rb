@@ -6,7 +6,6 @@ class Country < ActiveRecord::Base
 
   validates :cities, nested_uniqueness: {
     column: :name,
-    scope: [:country_id],
-    case_sensitive: false
+    scope: [:country_id]
   }
 end

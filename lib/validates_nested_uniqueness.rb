@@ -43,6 +43,35 @@ module ActiveRecord
     end
 
     module ClassMethods
+      # Validates whether associations are uniqueness when using accepts_nested_attributes_for.
+      # Useful for making sure that only one city of the country
+      # can be named "NY".
+      #
+      #   class City < ActiveRecord::Base
+      #     belongs_to :country
+      #   end
+      #
+      #   class Country < ActiveRecord::Base
+      #     has_many :cities, dependent: :destroy
+      #     accepts_nested_attributes_for :cities, allow_destroy: true
+      #
+      #     validates :cities, nested_uniqueness: {
+      #       watch: :name,
+      #       scope: [:country_id],
+      #       case_sensitive: false
+      #     }
+      #   end
+      #
+      #   country = Country.new(name: 'US', cities: [City.new(name: 'NY'), City.new(name: 'NY')])
+      #
+      # Configuration options:
+      # * <tt>:watch</tt> - Specify the column of associated model to validate.
+      # * <tt>:scope</tt> - One or more columns by which to limit the scope of
+      #   the uniqueness constraint.
+      # * <tt>:case_sensitive</tt> - Looks for an exact match. Ignored by
+      #   non-text columns (+true+ by default).
+      # * <tt>:message</tt> - A custom error message (default is: "Please choose unique values.").
+      # * <tt>:error_key</tt> - A custom error key to use (default is: :nested_taken).
       def validates_nested_uniqueness_of(*attr_names)
         validates_with NestedUniquenessValidator, _merge_attributes(attr_names)
       end

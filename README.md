@@ -2,9 +2,9 @@
 
 [![Ruby](https://github.com/mamantoha/validates_nested_uniqueness/actions/workflows/ruby.yml/badge.svg)](https://github.com/mamantoha/validates_nested_uniqueness/actions/workflows/ruby.yml)
 
-This gem adds the capability of validating nested uniqueness to ActiveRecord.
+Validates whether associations are uniqueness when using `accepts_nested_attributes_for`.
 
-<https://github.com/rails/rails/issues/20676>
+Solves the original issue: <https://github.com/rails/rails/issues/20676>.
 
 ## Installation
 
@@ -23,6 +23,8 @@ gem install validates_nested_uniqueness
 ```
 
 ## Usage
+
+Making sure that only one `city` of the `country` can be named "NY".
 
 ```ruby
 class City < ActiveRecord::Base

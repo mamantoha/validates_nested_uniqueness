@@ -4,7 +4,11 @@
 
 Validates whether associations are uniqueness when using `accepts_nested_attributes_for`.
 
-Solves the original issue: <https://github.com/rails/rails/issues/20676>.
+Solves the original Rails issue [#20676](https://github.com/rails/rails/issues/20676).
+
+This issue is very annoying and still open after years. And probably this will never be fixed.
+
+This code is based on solutions proposed in the thread. Thanks everyone ❤️.
 
 ## Installation
 

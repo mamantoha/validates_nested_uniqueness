@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 require 'active_model'
-require 'active_support/i18n'
-I18n.load_path += Dir["#{File.dirname(__FILE__)}/locale/*.yml"]
 
 module ActiveRecord
   module Validations
@@ -19,7 +17,7 @@ module ActiveRecord
         @column = options[:column]
         @case_sensitive = options[:case_sensitive]
         @scope = options[:scope] || []
-        @error_key = options[:error_key] || :nested_taken
+        @error_key = options[:error_key] || :taken
         @message = options[:message] || nil
       end
 
@@ -70,7 +68,7 @@ module ActiveRecord
       #   the uniqueness constraint.
       # * <tt>:case_sensitive</tt> - Looks for an exact match. Ignored by
       #   non-text columns (+true+ by default).
-      # * <tt>:message</tt> - A custom error message (default is: "Please choose unique values.").
+      # * <tt>:message</tt> - A custom error message (default is: "has already been taken").
       # * <tt>:error_key</tt> - A custom error key to use (default is: :nested_taken).
       def validates_nested_uniqueness_of(*attr_names)
         validates_with NestedUniquenessValidator, _merge_attributes(attr_names)

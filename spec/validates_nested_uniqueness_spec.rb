@@ -29,7 +29,7 @@ RSpec.describe 'Nested uniqueness validation' do
 
       expect(country).not_to be_valid
       expect(country.errors[:base].size).to eq(1)
-      expect(country.errors[:base].first).to eq('Please choose unique values.')
+      expect(country.errors[:base].first).to eq('has already been taken')
     end
 
     it 'allows set nested attributes' do

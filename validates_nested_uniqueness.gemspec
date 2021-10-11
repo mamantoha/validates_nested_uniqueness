@@ -13,7 +13,6 @@ Gem::Specification.new do |gem|
   gem.files = [
     'README.md',
     'LICENSE',
-    'lib/locale/en.yml',
     'lib/validates_nested_uniqueness.rb'
   ]
   gem.require_paths = ['lib']

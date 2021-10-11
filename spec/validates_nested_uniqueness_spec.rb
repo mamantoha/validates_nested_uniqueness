@@ -28,8 +28,10 @@ RSpec.describe 'Nested uniqueness validation' do
       country.cities_attributes = [{ name: 'NY' }, { name: 'NY' }]
 
       expect(country).not_to be_valid
-      expect(country.errors[:base].size).to eq(1)
-      expect(country.errors[:base].first).to eq('has already been taken')
+
+      expect(country.errors[:cities].size).to eq(1)
+      expect(country.errors[:cities].first).to eq('has already been taken')
+      expect(country.errors.full_messages).to eq(['Cities has already been taken'])
     end
 
     it 'allows set nested attributes' do
@@ -62,8 +64,8 @@ RSpec.describe 'Nested uniqueness validation' do
       country.cities_attributes = [{ name: 'NY' }, { name: 'NY' }]
 
       expect(country).not_to be_valid
-      expect(country.errors[:base].size).to eq(1)
-      expect(country.errors[:base].first).to eq("City's name should be unique per country")
+      expect(country.errors[:cities].size).to eq(1)
+      expect(country.errors[:cities].first).to eq("City's name should be unique per country")
     end
   end
 end

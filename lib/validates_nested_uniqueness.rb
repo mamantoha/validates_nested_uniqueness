@@ -21,18 +21,20 @@ module ActiveRecord
         @message = options[:message] || nil
       end
 
-      def validate_each(record, _attribute, value)
+      def validate_each(record, association_name, value)
         dupes = Set.new
 
         value.reject(&:marked_for_destruction?).map do |nested_val|
           dupe = @scope.each.each_with_object({}) do |(k), memo|
             memo[k] = nested_val.try(k)
           end
+
           dupe[@column] = nested_val.try(@column)
           dupe[@column] = dupe[@column].try(:downcase) if @case_sensitive == false
 
           if dupes.member?(dupe)
-            record.errors.add(:base, @error_key, message: @message)
+            # record.errors.add(:base, @error_key, message: @message)
+            record.errors.add(association_name, @error_key, message: @message)
           else
             dupes.add(dupe)
           end

@@ -99,7 +99,7 @@ module ActiveRecord
       # * <tt>:case_sensitive</tt> - Looks for an exact match. Ignored by
       #   non-text columns (+true+ by default).
       # * <tt>:message</tt> - A custom error message (default is: "has already been taken").
-      # * <tt>:error_key</tt> - A custom error key to use (default is: :nested_taken).
+      # * <tt>:error_key</tt> - A custom error key to use (default is: :taken).
       def validates_nested_uniqueness_of(*attr_names)
         validates_with NestedUniquenessValidator, _merge_attributes(attr_names)
       end

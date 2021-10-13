@@ -51,6 +51,14 @@ country.save
 # => false
 ```
 
+Configuration options:
+
+- `:attribute` - Specify the attribute name of associated model to validate.
+- `:scope` - One or more columns by which to limit the scope of the uniqueness constraint.
+- `:case_sensitive` - Looks for an exact match. Ignored by non-text columns (`true` by default).
+- `:message` - A custom error message (default is: "has already been taken").
+- `:error_key` - A custom error key to use (default is: `:taken`).
+
 ## Contributing
 
 1. Fork it (<https://github.com/mamantoha/validates_nested_uniqueness/fork>)

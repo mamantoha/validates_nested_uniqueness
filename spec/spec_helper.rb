@@ -21,4 +21,5 @@ require File.join(File.dirname(__FILE__), '..', 'init')
 autoload :Country, 'resources/country'
 autoload :CountryWithCaseSensitive, 'resources/country_with_case_sensitive'
 autoload :CountryWithMessage, 'resources/country_with_message'
+autoload :CountryWithIndexErrors, 'resources/country_with_index_errors'
 autoload :City, 'resources/city'

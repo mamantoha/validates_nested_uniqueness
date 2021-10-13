@@ -14,7 +14,7 @@ module ActiveRecord
 
         super
 
-        @column = options[:column]
+        @attribute_name = options[:attribute]
         @case_sensitive = options[:case_sensitive]
         @scope = options[:scope] || []
         @error_key = options[:error_key] || :taken
@@ -22,22 +22,50 @@ module ActiveRecord
       end
 
       def validate_each(record, association_name, value)
-        dupes = Set.new
+        track_values = Set.new
 
-        value.reject(&:marked_for_destruction?).map do |nested_val|
-          dupe = @scope.each.each_with_object({}) do |(k), memo|
-            memo[k] = nested_val.try(k)
+        reflection = record._reflections[association_name.to_s]
+        indexed_attribute = reflection.options[:index_errors] || ActiveRecord::Base.try(:index_nested_attribute_errors)
+
+        value.reject(&:marked_for_destruction?).map.with_index do |nested_value, index|
+          nomatized_attribute = nomatize_attribute(association_name, indexed_attribute, index)
+
+          track_value = @scope.each.each_with_object({}) do |(k), memo|
+            memo[k] = nested_value.try(k)
           end
 
-          dupe[@column] = nested_val.try(@column)
-          dupe[@column] = dupe[@column].try(:downcase) if @case_sensitive == false
+          track_value[@attribute_name] = nested_value.try(@attribute_name)
+          track_value[@attribute_name] = track_value[@attribute_name].try(:downcase) if @case_sensitive == false
 
-          if dupes.member?(dupe)
-            # record.errors.add(:base, @error_key, message: @message)
-            record.errors.add(association_name, @error_key, message: @message)
+          if track_values.member?(track_value)
+            if ActiveModel.version < Gem::Version.new('6.1.0')
+              record.errors.add(association_name, @error_key, message: @message)
+            else
+              inner_error = ActiveModel::Error.new(
+                nested_value,
+                @attribute_name,
+                @error_key,
+                value: nested_value[@attribute_name],
+                message: @message
+              )
+
+              error = ActiveModel::NestedError.new(record, inner_error, attribute: nomatized_attribute)
+
+              record.errors.import(error)
+            end
           else
-            dupes.add(dupe)
+            track_values.add(track_value)
           end
+        end
+      end
+
+      private
+
+      def nomatize_attribute(association_name, indexed_attribute = false, index = nil)
+        if indexed_attribute
+          "#{association_name}[#{index}].#{@attribute_name}"
+        else
+          "#{association_name}.#{@attribute_name}"
         end
       end
     end
@@ -56,7 +84,7 @@ module ActiveRecord
       #     accepts_nested_attributes_for :cities, allow_destroy: true
       #
       #     validates :cities, nested_uniqueness: {
-      #       column: :name,
+      #       attribute: :name,
       #       scope: [:country_id],
       #       case_sensitive: false
       #     }
@@ -65,7 +93,7 @@ module ActiveRecord
       #   country = Country.new(name: 'US', cities: [City.new(name: 'NY'), City.new(name: 'NY')])
       #
       # Configuration options:
-      # * <tt>:column</tt> - Specify the column of associated model to validate.
+      # * <tt>:attribute</tt> - Specify the attribute name of associated model to validate.
       # * <tt>:scope</tt> - One or more columns by which to limit the scope of
       #   the uniqueness constraint.
       # * <tt>:case_sensitive</tt> - Looks for an exact match. Ignored by

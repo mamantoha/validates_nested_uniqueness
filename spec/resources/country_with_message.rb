@@ -7,8 +7,8 @@ class CountryWithMessage < ActiveRecord::Base
   accepts_nested_attributes_for :cities, allow_destroy: true
 
   validates :cities, nested_uniqueness: {
-    column: :name,
+    attribute: :name,
     scope: [:country_id],
-    message: "City's name should be unique per country"
+    message: 'should be unique per country'
   }
 end

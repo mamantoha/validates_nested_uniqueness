@@ -7,7 +7,7 @@ class CountryWithCaseSensitive < ActiveRecord::Base
   accepts_nested_attributes_for :cities, allow_destroy: true
 
   validates :cities, nested_uniqueness: {
-    column: :name,
+    attribute: :name,
     scope: [:country_id],
     case_sensitive: false
   }

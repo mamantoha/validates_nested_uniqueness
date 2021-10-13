@@ -12,7 +12,7 @@ This code is based on solutions proposed in the thread. Thanks everyone ❤️.
 
 ## Installation
 
-`validates_nested_uniqueness` works with Rails 4.1 onwards.
+`validates_nested_uniqueness` works with Rails 4.2 onwards.
 
 Add this to your `Gemfile`:
 
@@ -40,7 +40,7 @@ class Country < ActiveRecord::Base
   accepts_nested_attributes_for :cities, allow_destroy: true
 
   validates :cities, nested_uniqueness: {
-    column: :name,
+    attribute: :name,
     scope: [:country_id],
     case_sensitive: false
   }

@@ -25,13 +25,25 @@ RSpec.describe 'Nested uniqueness validation' do
     let!(:country) { Country.new }
 
     it 'does not allow duplicated nested attributes' do
-      country.cities_attributes = [{ name: 'NY' }, { name: 'NY' }]
+      country.cities_attributes = [{ name: 'NY' }, { name: 'NY' }, { name: 'NY' }]
 
       expect(country).not_to be_valid
 
-      expect(country.errors[:cities].size).to eq(1)
-      expect(country.errors[:cities].first).to eq('has already been taken')
-      expect(country.errors.full_messages).to eq(['Cities has already been taken'])
+      if ActiveModel.version < Gem::Version.new('5.0.0')
+        expect(country.errors.size).to eq(2)
+        expect(country.errors.first).to eq([:cities, 'has already been taken'])
+        expect(country.errors.full_messages).to eq(
+          ['Cities has already been taken', 'Cities has already been taken']
+        )
+      elsif ActiveModel.version < Gem::Version.new('6.1.0')
+        expect(country.errors.size).to eq(1)
+        expect(country.errors.first).to eq([:cities, 'has already been taken'])
+        expect(country.errors.full_messages).to eq(['Cities has already been taken'])
+      else
+        expect(country.errors.size).to eq(1)
+        expect(country.errors.first.message).to eq('has already been taken')
+        expect(country.errors.full_messages).to eq(['Cities name has already been taken'])
+      end
     end
 
     it 'allows set nested attributes' do
@@ -64,8 +76,40 @@ RSpec.describe 'Nested uniqueness validation' do
       country.cities_attributes = [{ name: 'NY' }, { name: 'NY' }]
 
       expect(country).not_to be_valid
-      expect(country.errors[:cities].size).to eq(1)
-      expect(country.errors[:cities].first).to eq("City's name should be unique per country")
+
+      expect(country.errors.size).to eq(1)
+
+      if ActiveModel.version < Gem::Version.new('6.1.0')
+        expect(country.errors.first).to eq([:cities, 'should be unique per country'])
+        expect(country.errors.full_messages).to eq(['Cities should be unique per country'])
+      else
+        expect(country.errors.first.message).to eq('should be unique per country')
+        expect(country.errors.full_messages).to eq(['Cities name should be unique per country'])
+      end
+    end
+  end
+
+  context 'with index errors', skip: (ActiveModel.version < Gem::Version.new('5.0.0')) do
+    let!(:country) { CountryWithIndexErrors.new }
+
+    it 'errors should be indexed' do
+      country.cities_attributes = [{ name: 'NY' }, { name: 'NY' }, { name: 'NY' }]
+
+      expect(country).not_to be_valid
+
+      if ActiveModel.version < Gem::Version.new('6.1.0')
+        expect(country.errors.size).to eq(1)
+        expect(country.errors.first).to eq([:cities, 'has already been taken'])
+        expect(country.errors.full_messages).to eq(
+          ['Cities has already been taken']
+        )
+      else
+        expect(country.errors.size).to eq(2)
+        expect(country.errors.first.message).to eq('has already been taken')
+        expect(country.errors.full_messages).to eq(
+          ['Cities[1] name has already been taken', 'Cities[2] name has already been taken']
+        )
+      end
     end
   end
 end

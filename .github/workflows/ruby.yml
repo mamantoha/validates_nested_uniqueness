@@ -36,6 +36,8 @@ jobs:
             gemfile: gemfiles/Gemfile-rails-4-2
           - ruby-version: 2.7
             gemfile: gemfiles/Gemfile-rails-4-2
+          - ruby-version: 2.6
+            gemfile: gemfiles/Gemfile-rails-7-0
 
     runs-on: ubuntu-latest
     env:

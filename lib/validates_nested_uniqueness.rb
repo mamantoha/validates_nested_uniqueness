@@ -28,7 +28,7 @@ module ActiveRecord
         indexed_attribute = reflection.options[:index_errors] || ActiveRecord::Base.try(:index_nested_attribute_errors)
 
         value.reject(&:marked_for_destruction?).map.with_index do |nested_value, index|
-          nomatized_attribute = nomatize_attribute(association_name, indexed_attribute, index)
+          normalized_attribute = normalize_attribute(association_name, indexed_attribute, index)
 
           track_value = @scope.each.each_with_object({}) do |(k), memo|
             memo[k] = nested_value.try(k)
@@ -49,7 +49,7 @@ module ActiveRecord
                 message: @message
               )
 
-              error = ActiveModel::NestedError.new(record, inner_error, attribute: nomatized_attribute)
+              error = ActiveModel::NestedError.new(record, inner_error, attribute: normalized_attribute)
 
               record.errors.import(error)
             end
@@ -61,7 +61,7 @@ module ActiveRecord
 
       private
 
-      def nomatize_attribute(association_name, indexed_attribute = false, index = nil)
+      def normalize_attribute(association_name, indexed_attribute = false, index = nil)
         if indexed_attribute
           "#{association_name}[#{index}].#{@attribute_name}"
         else

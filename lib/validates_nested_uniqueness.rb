@@ -71,6 +71,7 @@ module ActiveRecord
       end
     end
 
+    # :nodoc:
     module ClassMethods
       # Validates whether associations are uniqueness when using accepts_nested_attributes_for.
       # Useful for making sure that only one city of the country

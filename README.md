@@ -14,16 +14,10 @@ This code is based on solutions proposed in the thread. Thanks everyone ❤️.
 
 `validates_nested_uniqueness` works with Rails 4.2 onwards.
 
-Add this to your `Gemfile`:
+Add this to your Rails project's `Gemfile`:
 
 ```ruby
-gem "validates_nested_uniqueness"
-```
-
-Or install it yourself:
-
-```console
-gem install validates_nested_uniqueness
+gem 'validates_nested_uniqueness', git: 'https://github.com/mamantoha/validates_nested_uniqueness'
 ```
 
 ## Usage

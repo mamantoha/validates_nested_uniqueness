@@ -67,6 +67,6 @@ Configuration options:
 
 ## License
 
-Copyright: 2021-2022 Anton Maminov (anton.maminov@gmail.com)
+Copyright: 2021-2023 Anton Maminov (anton.maminov@gmail.com)
 
 This library is distributed under the MIT license. Please see the LICENSE file.

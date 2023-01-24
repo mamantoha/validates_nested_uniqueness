@@ -31,7 +31,7 @@ module ActiveRecord
           normalized_attribute = normalize_attribute(association_name, indexed_attribute: indexed_attribute,
                                                                        index: index)
 
-          track_value = @scope.each.each_with_object({}) do |(k), memo|
+          track_value = @scope.each.each_with_object({}) do |k, memo|
             memo[k] = nested_value.try(k)
           end
 

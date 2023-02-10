@@ -6,3 +6,7 @@ gemspec
 platforms :ruby do
   gem 'sqlite3', '~> 1.4'
 end
+
+group :development do
+  gem "ruby-lsp", require: false
+end

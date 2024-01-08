@@ -16,7 +16,7 @@ Gem::Specification.new do |gem|
     'lib/validates_nested_uniqueness.rb'
   ]
   gem.require_paths = ['lib']
-  gem.required_ruby_version = '>= 2.6.0'
+  gem.required_ruby_version = '>= 2.7.0'
 
   gem.add_runtime_dependency('activemodel', '>= 4.2.0')
 

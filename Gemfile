@@ -8,5 +8,5 @@ platforms :ruby do
 end
 
 group :development do
-  gem "ruby-lsp", require: false
+  gem 'ruby-lsp', require: false
 end

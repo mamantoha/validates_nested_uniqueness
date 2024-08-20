@@ -9,7 +9,7 @@ module ActiveRecord
       def initialize(options)
         unless Array(options[:scope]).all? { |scope| scope.respond_to?(:to_sym) }
           raise ArgumentError, "#{options[:scope]} is not supported format for :scope option. " \
-            'Pass a symbol or an array of symbols instead: `scope: :user_id`'
+                               'Pass a symbol or an array of symbols instead: `scope: :user_id`'
         end
 
         super
@@ -29,10 +29,9 @@ module ActiveRecord
         indexed_attribute = reflection.options[:index_errors] || ActiveRecord::Base.try(:index_nested_attribute_errors)
 
         value.reject(&:marked_for_destruction?).select(&:changed_for_autosave?).map.with_index do |nested_value, index|
-          normalized_attribute = normalize_attribute(association_name, indexed_attribute: indexed_attribute,
-                                                                       index: index)
+          normalized_attribute = normalize_attribute(association_name, indexed_attribute:, index:)
 
-          track_value = @scope.each.each_with_object({}) do |k, memo|
+          track_value = @scope.each.with_object({}) do |k, memo|
             memo[k] = nested_value.try(k)
           end
 

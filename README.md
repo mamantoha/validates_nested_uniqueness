@@ -43,6 +43,12 @@ end
 country = Country.new(name: 'US', cities: [City.new(name: 'NY'), City.new(name: 'NY')])
 country.save
 # => false
+
+country.errors
+# => #<ActiveModel::Errors [#<ActiveModel::NestedError attribute=cities.name, type=taken, options={:value=>"NY", :message=>nil}>]>
+
+country.errors.messages
+# => {"cities.name"=>["has already been taken"]}
 ```
 
 Configuration options:

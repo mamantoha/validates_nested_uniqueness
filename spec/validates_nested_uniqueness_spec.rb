@@ -29,7 +29,6 @@ RSpec.describe 'Nested uniqueness validation' do
 
       expect(country).not_to be_valid
 
-
       expect(country.errors.size).to eq(1)
       expect(country.errors.first.message).to eq('has already been taken')
       expect(country.errors.full_messages).to eq(['Cities name has already been taken'])

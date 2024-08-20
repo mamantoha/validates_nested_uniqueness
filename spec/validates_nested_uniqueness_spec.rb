@@ -29,15 +29,10 @@ RSpec.describe 'Nested uniqueness validation' do
 
       expect(country).not_to be_valid
 
-      if ActiveModel.version < Gem::Version.new('6.1.0')
-        expect(country.errors.size).to eq(1)
-        expect(country.errors.first).to eq([:cities, 'has already been taken'])
-        expect(country.errors.full_messages).to eq(['Cities has already been taken'])
-      else
-        expect(country.errors.size).to eq(1)
-        expect(country.errors.first.message).to eq('has already been taken')
-        expect(country.errors.full_messages).to eq(['Cities name has already been taken'])
-      end
+
+      expect(country.errors.size).to eq(1)
+      expect(country.errors.first.message).to eq('has already been taken')
+      expect(country.errors.full_messages).to eq(['Cities name has already been taken'])
     end
 
     it 'allows set nested attributes' do
@@ -73,13 +68,8 @@ RSpec.describe 'Nested uniqueness validation' do
 
       expect(country.errors.size).to eq(1)
 
-      if ActiveModel.version < Gem::Version.new('6.1.0')
-        expect(country.errors.first).to eq([:cities, 'should be unique per country'])
-        expect(country.errors.full_messages).to eq(['Cities should be unique per country'])
-      else
-        expect(country.errors.first.message).to eq('should be unique per country')
-        expect(country.errors.full_messages).to eq(['Cities name should be unique per country'])
-      end
+      expect(country.errors.first.message).to eq('should be unique per country')
+      expect(country.errors.full_messages).to eq(['Cities name should be unique per country'])
     end
   end
 
@@ -91,19 +81,11 @@ RSpec.describe 'Nested uniqueness validation' do
 
       expect(country).not_to be_valid
 
-      if ActiveModel.version < Gem::Version.new('6.1.0')
-        expect(country.errors.size).to eq(1)
-        expect(country.errors.first).to eq([:cities, 'has already been taken'])
-        expect(country.errors.full_messages).to eq(
-          ['Cities has already been taken']
-        )
-      else
-        expect(country.errors.size).to eq(2)
-        expect(country.errors.first.message).to eq('has already been taken')
-        expect(country.errors.full_messages).to eq(
-          ['Cities[1] name has already been taken', 'Cities[2] name has already been taken']
-        )
-      end
+      expect(country.errors.size).to eq(2)
+      expect(country.errors.first.message).to eq('has already been taken')
+      expect(country.errors.full_messages).to eq(
+        ['Cities[1] name has already been taken', 'Cities[2] name has already been taken']
+      )
     end
   end
 end

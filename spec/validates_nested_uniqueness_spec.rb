@@ -29,13 +29,7 @@ RSpec.describe 'Nested uniqueness validation' do
 
       expect(country).not_to be_valid
 
-      if ActiveModel.version < Gem::Version.new('5.0.0')
-        expect(country.errors.size).to eq(2)
-        expect(country.errors.first).to eq([:cities, 'has already been taken'])
-        expect(country.errors.full_messages).to eq(
-          ['Cities has already been taken', 'Cities has already been taken']
-        )
-      elsif ActiveModel.version < Gem::Version.new('6.1.0')
+      if ActiveModel.version < Gem::Version.new('6.1.0')
         expect(country.errors.size).to eq(1)
         expect(country.errors.first).to eq([:cities, 'has already been taken'])
         expect(country.errors.full_messages).to eq(['Cities has already been taken'])
@@ -89,7 +83,7 @@ RSpec.describe 'Nested uniqueness validation' do
     end
   end
 
-  context 'with index errors', skip: (ActiveModel.version < Gem::Version.new('5.0.0')) do
+  context 'with index errors' do
     let!(:country) { CountryWithIndexErrors.new }
 
     it 'errors should be indexed' do

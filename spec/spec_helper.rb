@@ -16,6 +16,26 @@ ActiveRecord::Base.establish_connection(
   'database' => ':memory:'
 )
 
+RSpec.configure do |config|
+  config.before(:suite) do
+    ActiveRecord::Schema.define(version: 1) do
+      create_table :countries, force: true do |t|
+        t.column :name, :string
+      end
+
+      create_table :cities, force: true do |t|
+        t.belongs_to :country
+        t.column :name, :string
+      end
+    end
+  end
+
+  config.after(:suite) do
+    ActiveRecord::Base.connection.drop_table(:countries)
+    ActiveRecord::Base.connection.drop_table(:cities)
+  end
+end
+
 require File.join(File.dirname(__FILE__), '..', 'init')
 
 autoload :Country, 'resources/country'

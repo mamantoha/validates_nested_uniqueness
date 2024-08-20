@@ -24,7 +24,7 @@ module ActiveRecord
       def validate_each(record, association_name, value)
         track_values = Set.new
 
-        reflection = record._reflections[association_name.to_s]
+        reflection = record._reflections[association_name]
         indexed_attribute = reflection.options[:index_errors] || ActiveRecord::Base.try(:index_nested_attribute_errors)
 
         value.reject(&:marked_for_destruction?).select(&:changed_for_autosave?).map.with_index do |nested_value, index|

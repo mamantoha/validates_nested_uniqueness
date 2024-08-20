@@ -24,12 +24,7 @@ module ActiveRecord
       def validate_each(record, association_name, value)
         track_values = Set.new
 
-        reflection =
-          if ActiveModel.version >= Gem::Version.new('7.2.0')
-            record._reflections[association_name]
-          else
-            record._reflections[association_name.to_s]
-          end
+        reflection = record.class.reflections[association_name.to_s]
 
         indexed_attribute = reflection.options[:index_errors] || ActiveRecord::Base.try(:index_nested_attribute_errors)
 
@@ -45,21 +40,17 @@ module ActiveRecord
           track_value[@attribute_name] = track_value[@attribute_name].try(:downcase) if @case_sensitive == false
 
           if track_values.member?(track_value)
-            if ActiveModel.version < Gem::Version.new('6.1.0')
-              record.errors.add(association_name, @error_key, message: @message)
-            else
-              inner_error = ActiveModel::Error.new(
-                nested_value,
-                @attribute_name,
-                @error_key,
-                value: nested_value[@attribute_name],
-                message: @message
-              )
+            inner_error = ActiveModel::Error.new(
+              nested_value,
+              @attribute_name,
+              @error_key,
+              value: nested_value[@attribute_name],
+              message: @message
+            )
 
-              error = ActiveModel::NestedError.new(record, inner_error, attribute: normalized_attribute)
+            error = ActiveModel::NestedError.new(record, inner_error, attribute: normalized_attribute)
 
-              record.errors.import(error)
-            end
+            record.errors.import(error)
           else
             track_values.add(track_value)
           end

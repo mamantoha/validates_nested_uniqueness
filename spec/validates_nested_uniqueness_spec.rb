@@ -3,24 +3,6 @@
 require 'spec_helper'
 
 RSpec.describe 'Nested uniqueness validation' do
-  before(:all) do
-    ActiveRecord::Schema.define(version: 1) do
-      create_table :countries, force: true do |t|
-        t.column :name, :string
-      end
-
-      create_table :cities, force: true do |t|
-        t.belongs_to :country
-        t.column :name, :string
-      end
-    end
-  end
-
-  after(:all) do
-    ActiveRecord::Base.connection.drop_table(:countries)
-    ActiveRecord::Base.connection.drop_table(:cities)
-  end
-
   context 'with regular validator' do
     let!(:country) { Country.new }
 

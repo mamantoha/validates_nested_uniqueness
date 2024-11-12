@@ -26,8 +26,5 @@ RSpec/MultipleExpectations:
 RSpec/ExampleLength:
   Enabled: false
 
-RSpec/DescribeClass:
-  Enabled: false
-
 Rails/I18nLocaleTexts:
   Enabled: false

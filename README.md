@@ -59,6 +59,10 @@ Configuration options:
 - `:message` - A custom error message (default is: "has already been taken").
 - `:error_key` - A custom error key to use (default is: `:taken`).
 
+## Sponsorship
+
+This library is sponsored by [Faria Education Group](https://github.com/eduvo), where it was originally developed and utilized in a production project. It has been extracted and refined for open-source use.
+
 ## Contributing
 
 1. Fork it (<https://github.com/mamantoha/validates_nested_uniqueness/fork>)

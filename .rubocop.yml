@@ -4,3 +4,30 @@ AllCops:
 require:
   - rubocop-rails
   - rubocop-rspec
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+Gemspec/DevelopmentDependencies:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/DescribeClass:
+  Enabled: false
+
+Rails/I18nLocaleTexts:
+  Enabled: false

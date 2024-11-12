@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe 'Nested uniqueness validation' do
+RSpec.describe 'ActiveRecord::Validations::NestedUniquenessValidator' do
   context 'with regular validator' do
     let!(:country) { Country.new }
 

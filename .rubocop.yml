@@ -1,3 +1,28 @@
 AllCops:
   NewCops: enable
-require: rubocop-rspec
+
+require:
+  - rubocop-rails
+  - rubocop-rspec
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+Rails/I18nLocaleTexts:
+  Exclude:
+    - 'spec/resources/country_with_message.rb'

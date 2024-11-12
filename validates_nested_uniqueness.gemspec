@@ -20,7 +20,5 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency('activemodel', '>= 6.1.0')
 
-  gem.add_development_dependency('activerecord', '>= 6.1.0')
-  gem.add_development_dependency('rspec', '>= 3.0.0')
   gem.metadata['rubygems_mfa_required'] = 'true'
 end

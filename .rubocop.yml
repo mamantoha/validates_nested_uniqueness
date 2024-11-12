@@ -17,9 +17,6 @@ Metrics/CyclomaticComplexity:
 Metrics/PerceivedComplexity:
   Enabled: false
 
-Gemspec/DevelopmentDependencies:
-  Enabled: false
-
 RSpec/MultipleExpectations:
   Enabled: false
 

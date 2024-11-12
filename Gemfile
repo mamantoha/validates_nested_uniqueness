@@ -8,6 +8,8 @@ platforms :ruby do
 end
 
 group :development do
+  gem 'activerecord', '>= 6.1.0'
+  gem 'rspec', '>= 3.0.0'
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false

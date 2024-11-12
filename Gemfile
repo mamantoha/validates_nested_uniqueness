@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 gemspec
 
 platforms :ruby do
-  gem 'sqlite3', '~> 1.4'
+  gem 'sqlite3', '>= 2.1'
 end
 
 group :development do

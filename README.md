@@ -1,6 +1,8 @@
 # Validates Nested Uniqueness
 
 [![Ruby](https://github.com/mamantoha/validates_nested_uniqueness/actions/workflows/ruby.yml/badge.svg)](https://github.com/mamantoha/validates_nested_uniqueness/actions/workflows/ruby.yml)
+[![GitHub release](https://img.shields.io/github/release/mamantoha/validates_nested_uniqueness.svg)](https://github.com/mamantoha/validates_nested_uniqueness/releases)
+[![License](https://img.shields.io/github/license/mamantoha/validates_nested_uniqueness.svg)](https://github.com/mamantoha/validates_nested_uniqueness/blob/main/LICENSE)
 
 Validates whether associations are uniqueness when using `accepts_nested_attributes_for`.
 

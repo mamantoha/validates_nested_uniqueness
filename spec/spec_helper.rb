@@ -6,6 +6,7 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
 
 require 'rspec'
 require 'sqlite3'
+require 'logger'
 require 'active_record'
 require 'active_record/base'
 require 'active_record/migration'

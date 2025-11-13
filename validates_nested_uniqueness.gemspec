@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |gem|
   gem.name = 'validates_nested_uniqueness'
-  gem.version = '1.2.0'
+  gem.version = '1.3.0'
 
   gem.summary = 'Library for validating nested uniqueness in Rails.'
   gem.author = 'Anton Maminov'
@@ -13,6 +13,7 @@ Gem::Specification.new do |gem|
   gem.files = [
     'README.md',
     'LICENSE',
+    'CHANGELOG.md',
     'lib/validates_nested_uniqueness.rb'
   ]
   gem.require_paths = ['lib']

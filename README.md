@@ -14,12 +14,18 @@ This code is based on solutions proposed in the thread. Thanks everyone ❤️.
 
 ## Installation
 
-`validates_nested_uniqueness` works with Rails 7.2 onwards.
+`rails_validates_nested_uniqueness` works with Rails 7.2 onwards.
 
 Add this to your Rails project's `Gemfile`:
 
 ```ruby
-gem 'validates_nested_uniqueness', git: 'https://github.com/mamantoha/validates_nested_uniqueness'
+gem 'rails_validates_nested_uniqueness'
+```
+
+Or install directly:
+
+```bash
+gem install rails_validates_nested_uniqueness
 ```
 
 ## Usage

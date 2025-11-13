@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Extensive test coverage for edge cases
 
 ### Changed
+- **Gem name changed to `rails_validates_nested_uniqueness`** for RubyGems publication
 - Refactored validator logic into smaller, focused methods
 - Improved code organization and maintainability
 - Enhanced documentation with more examples

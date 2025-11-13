@@ -1,14 +1,16 @@
 # frozen_string_literal: true
 
 Gem::Specification.new do |gem|
-  gem.name = 'validates_nested_uniqueness'
+  gem.name = 'rails_validates_nested_uniqueness'
   gem.version = '1.3.0'
 
-  gem.summary = 'Library for validating nested uniqueness in Rails.'
+  gem.summary = 'Rails library for validating nested uniqueness with accepts_nested_attributes_for.'
   gem.author = 'Anton Maminov'
   gem.email = 'anton.maminov@gmail.com'
   gem.homepage = 'https://github.com/mamantoha/validates_nested_uniqueness'
   gem.licenses = ['MIT']
+
+  gem.description = 'Validates whether associations are uniqueness when using accepts_nested_attributes_for.'
 
   gem.files = [
     'README.md',

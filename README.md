@@ -53,13 +53,30 @@ country.errors.messages
 # => {"cities.name"=>["has already been taken"]}
 ```
 
+## Advanced Usage
+
+### Custom Comparison Logic
+
+For more complex validation scenarios, you can provide custom comparison logic:
+
+```ruby
+validates :cities, nested_uniqueness: {
+  attribute: :name,
+  scope: [:country_id],
+  comparison: ->(value) { value.to_s.strip.downcase }
+}
+```
+
+This is useful when you need to normalize values before comparison (e.g., trimming whitespace, handling special characters, etc.).
+
 Configuration options:
 
-- `:attribute` - Specify the attribute name of associated model to validate.
+- `:attribute` - (Required) Specify the attribute name of associated model to validate.
 - `:scope` - One or more columns by which to limit the scope of the uniqueness constraint.
 - `:case_sensitive` - Looks for an exact match. Ignored by non-text columns (`true` by default).
 - `:message` - A custom error message (default is: "has already been taken").
 - `:error_key` - A custom error key to use (default is: `:taken`).
+- `:comparison` - A callable object (Proc/lambda) for custom value comparison logic.
 
 ## Sponsorship
 

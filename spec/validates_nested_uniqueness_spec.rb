@@ -69,4 +69,31 @@ RSpec.describe 'NestedUniquenessValidator' do
       )
     end
   end
+
+  context 'with custom comparison logic' do
+    let!(:country) { CountryWithCustomComparison.new }
+
+    it 'uses custom comparison for uniqueness check' do
+      country.cities_attributes = [
+        { name: '  New York  ' },
+        { name: 'NEW YORK' },
+        { name: 'new york' }
+      ]
+
+      expect(country).not_to be_valid
+      expect(country.errors.size).to eq(2)
+      expect(country.errors.full_messages).to include(
+        'Cities name has already been taken'
+      )
+    end
+
+    it 'allows different values after custom normalization' do
+      country.cities_attributes = [
+        { name: '  New York  ' },
+        { name: '  Los Angeles  ' }
+      ]
+
+      expect(country).to be_valid
+    end
+  end
 end

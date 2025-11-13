@@ -14,7 +14,7 @@ This code is based on solutions proposed in the thread. Thanks everyone ❤️.
 
 ## Installation
 
-`validates_nested_uniqueness` works with Rails 6.1 onwards.
+`validates_nested_uniqueness` works with Rails 7.2 onwards.
 
 Add this to your Rails project's `Gemfile`:
 

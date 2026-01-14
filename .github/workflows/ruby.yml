@@ -27,6 +27,7 @@ jobs:
           - 3.2
           - 3.3
           - 3.4
+          - 4.0
         exclude:
           - ruby-version: 3.4
             gemfile: gemfiles/Gemfile-rails-7-0
